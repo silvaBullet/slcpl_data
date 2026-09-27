@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What the July 27 Presentation Left Out</title>
+<style>
+  :root {
+    --ink: #0F0F0F;
+    --red: #B91C1C;
+    --slate: #475569;
+    --rule: #D1D5DB;
+    --bg: #FFFFFF;
+    --bg-alt: #F8F9FA;
+    --teal: #0E7490;
+    --amber: #B45309;
+    --green: #166534;
+    --code: #1E293B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--bg);
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* NAV */
+  .nav-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 48px;
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+  }
+  .nav-bar .nav-label { color: var(--slate); letter-spacing: .02em; }
+  .nav-bar a {
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    border: 1.5px solid var(--teal);
+    padding: 5px 12px;
+    border-radius: 3px;
+  }
+  .nav-bar a:hover { background: var(--teal); color: white; }
+
+  /* HEADER */
+  .doc-header { margin-bottom: 8px; }
+  .doc-header .eyebrow {
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--slate);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 14px;
+  }
+  .doc-header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .doc-header .byline {
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--slate);
+  }
+
+  /* SECTION */
+  section { margin-bottom: 56px; }
+  section + section { border-top: 1px solid var(--rule); padding-top: 48px; }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  h3 {
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--slate);
+    margin: 28px 0 10px;
+  }
+  p { margin-bottom: 16px; max-width: 68ch; }
+  p:last-child { margin-bottom: 0; }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    border-left: 4px solid var(--red);
+    padding: 16px 20px;
+    margin: 24px 0;
+    background: #FEF2F2;
+  }
+  .pull-quote p {
+    font-size: 1.05rem;
+    color: var(--red);
+    font-style: italic;
+    margin: 0;
+    max-width: none;
+  }
+  .pull-quote .attribution {
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--slate);
+    margin-top: 8px;
+    font-style: normal;
+  }
+
+  /* METRIC COMPARISON */
+  .metric-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 28px 0;
+    border: 1px solid var(--rule);
+  }
+  .metric-half {
+    padding: 24px;
+  }
+  .metric-half.theirs { background: var(--bg-alt); }
+  .metric-half.ours { background: #ECFDF5; }
+  .metric-half .label {
+    font-family: system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--slate);
+    margin-bottom: 8px;
+  }
+  .metric-half.ours .label { color: var(--green); }
+  .metric-half .question {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.4;
+    font-family: system-ui, sans-serif;
+  }
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-row .yr { color: var(--slate); }
+  .metric-row .val { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .metric-row .val.down { color: var(--green); }
+  .metric-row .val.up { color: var(--red); }
+
+  /* MATH BOX */
+  .math-box {
+    background: var(--code);
+    color: #E2E8F0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 20px 24px;
+    margin: 20px 0;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+  }
+  .math-box .highlight { color: #FCA5A5; }
+  .math-box .good { color: #86EFAC; }
+  .math-box .comment { color: #94A3B8; }
+
+  /* STAT CARDS */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .stat-card {
+    padding: 20px;
+    border: 1px solid var(--rule);
+  }
+  .stat-card .sc-label {
+    font-family: system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--slate);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+  }
+  .stat-card .sc-val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card .sc-val.neutral { color: var(--ink); }
+  .stat-card .sc-sub {
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--slate);
+    line-height: 1.4;
+  }
+
+  /* SORTABLE TABLE */
+  .tbl-wrap { overflow-x: auto; margin: 20px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+  }
+  thead th {
+    background: var(--ink);
+    color: white;
+    padding: 9px 10px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+  thead th.r { text-align: right; }
+  thead th:hover { background: #333; }
+  tbody tr:nth-child(even) { background: var(--bg-alt); }
+  tbody tr:hover { background: #EFF6FF; }
+  tbody td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  tbody td.r { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody td.hi { color: var(--red); font-weight: 700; }
+  tfoot td {
+    padding: 8px 10px;
+    font-weight: 700;
+    background: #F1F5F9;
+    border-top: 2px solid var(--ink);
+  }
+  tfoot td.r { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* YEAR SELECTOR */
+  .yr-nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .yr-btn {
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    background: white;
+    cursor: pointer;
+    color: var(--slate);
+  }
+  .yr-btn.active {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+  }
+  .yr-btn:hover:not(.active) { border-color: var(--ink); color: var(--ink); }
+
+  /* BADGE */
+  .tier-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-family: system-ui, sans-serif;
+  }
+  .b-cs  { background: #0E7490; color: white; }
+  .b-dir { background: #1D4ED8; color: white; }
+  .b-mgr { background: #B45309; color: white; }
+  .b-lib { background: #1D4ED8; color: white; }
+  .b-pro { background: #6D28D9; color: white; }
+  .b-ls  { background: #166534; color: white; }
+  .b-sup { background: #6B7280; color: white; }
+  .b-ldr { background: #B91C1C; color: white; }
+
+  /* CALLOUT */
+  .callout {
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--slate);
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .callout.red { border-left-color: var(--red); background: #FEF2F2; color: var(--ink); }
+  .callout.green { border-left-color: var(--green); background: #F0FDF4; }
+
+  /* TABLE CONTROLS */
+  .tbl-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .tbl-controls .cnt {
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--slate);
+    margin-left: auto;
+  }
+
+  .sort-arrow { opacity: 0.4; font-size: 10px; }
+  .sorted .sort-arrow { opacity: 1; }
+
+  /* FOOTER */
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  footer a { color: var(--teal); }
+
+  /* PROBLEM STACK */
+  .problem-stack { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+  .problem-card {
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--red);
+    padding: 16px 18px;
+    background: #FAFAFA;
+  }
+  .pc-label {
+    font-family: system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+  .pc-title {
+    font-family: system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .pc-claim {
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--slate);
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .pc-issue {
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ROSTER DRAWER */
+  .roster-drawer {
+    display: none;
+    background: #F8FAFC;
+    border-top: 1px solid var(--rule);
+    border-bottom: 2px solid var(--ink);
+  }
+  .roster-drawer.open { display: table-row-group; }
+  .roster-drawer td { padding: 0; }
+  .roster-inner {
+    padding: 12px 16px 16px;
+    font-family: system-ui, sans-serif;
+    font-size: 12px;
+  }
+  .roster-inner .r-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .roster-inner .r-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .roster-inner .r-close {
+    font-size: 11px;
+    color: var(--slate);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .roster-inner table {
+    width: 100%;
+    font-size: 12px;
+  }
+  .roster-inner thead th {
+    font-size: 11px;
+    padding: 6px 8px;
+    background: var(--ink);
+  }
+  .roster-inner tbody td { padding: 6px 8px; font-size: 12px; }
+  .drill-row { cursor: pointer; }
+  .drill-row:hover td { background: #EFF6FF !important; }
+  .drill-row td:first-child::after {
+    content: ' ↓';
+    font-size: 10px;
+    color: var(--teal);
+    opacity: 0.7;
+  }
+  .drill-row.open td:first-child::after { content: ' ↑'; }
+  .dash-link {
+    font-family: system-ui, sans-serif;
+    font-size: 11px;
+    color: var(--teal);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 12px;
+  }
+  .dash-link:hover { text-decoration: underline; }
+
+  @media print {
+    body { font-size: 13px; padding: 20px; max-width: 100%; color: #0F0F0F; }
+    .math-box {
+      white-space: pre-wrap;
+      font-size: 11px;
+      background: #F1F5F9 !important;
+      color: #0F0F0F !important;
+      border: 1px solid #94A3B8 !important;
+      border-radius: 0 !important;
+      padding: 16px 18px !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .math-box span {
+      color: #0F0F0F !important;
+    }
+    .math-box .highlight { color: #B91C1C !important; font-weight: bold; }
+    .math-box .good { color: #166534 !important; font-weight: bold; }
+    .math-box .comment { color: #475569 !important; font-style: italic; }
+    .nav-bar { display: none; }
+    .pull-quote {
+      border-left: 4px solid #B91C1C !important;
+      background: #FFF0F0 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .problem-card {
+      border-left: 4px solid #B91C1C !important;
+      background: #FAFAFA !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .tier-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    a { color: #0E7490; text-decoration: none; }
+    section { page-break-inside: avoid; }
+    .roster-drawer { display: none !important; }
+    .yr-nav { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  }
+
+  @media (max-width: 720px) {
+    body { padding: 20px 14px 60px; font-size: 15px; }
+    .metric-pair { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr; gap: 10px; }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    .math-box { font-size: 12px; white-space: pre-wrap; word-break: break-word; }
+    .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { min-width: 360px; }
+    .nav-bar { flex-direction: column; gap: 10px; align-items: flex-start; }
+    .metric-half { padding: 16px; }
+    .pull-quote { padding: 12px 14px; }
+    .stat-card .sc-val { font-size: 1.4rem; }
+  }
+
+  .yr-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .yr-btn { font-family: system-ui, sans-serif; font-size: 12px; font-weight: 600; padding: 4px 12px; border: 1.5px solid #D1D5DB; border-radius: 3px; background: white; cursor: pointer; color: #6B7280; }
+  .yr-btn.active { background: #0F0F0F; color: white; border-color: #0F0F0F; }
+  .yr-btn:hover:not(.active) { border-color: #0F0F0F; color: #0F0F0F; }
+  .tbl-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  #tier-cnt { font-size: 12px; color: #6B7280; }
+  body { max-width: 900px; margin: 0 auto; padding: 32px 40px; font-size: 13px; }
+  p { max-width: none; }
+  .nav-bar { display: flex; justify-content: flex-end; padding: 8px 0 16px; border-bottom: 1px solid #E5E7EB; margin-bottom: 24px; }
+  .nav-bar a { font-size: 12px; color: #0E7490; text-decoration: none; }
+  section { margin-bottom: 40px; padding-top: 32px; border-top: 1px solid #E5E7EB; }
+  section:first-of-type { padding-top: 0; border-top: none; }
+  table { table-layout: fixed; width: 100%; border-collapse: collapse; }
+  thead th { background: #0F0F0F; color: white; padding: 6px 8px; font-size: 11px; }
+  tbody td { padding: 5px 8px; font-size: 11px; border-bottom: 1px solid #F1F5F9; }
+  .tbl-wrap { overflow-x: auto; margin: 8px 0; }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="Dashboard.html">Full Data Dashboard &rarr;</a>
+</div>
+
+<header class="doc-header">
+  <div class="eyebrow">SLCPL Board · July 27, 2026</div>
+  <h1>Re: July 27 Presentation</h1>
+  <div class="byline">All figures sourced to <a href="https://old.transparent.utah.gov/entity_comp.php" target="_blank" style="color:var(--teal);text-decoration:underline">Transparent Utah</a> and Eide Bailly audited financials</div>
+</header>
+
+<!-- SECTION 1 -->
+
+<section style="border-top:1px solid #D1D5DB;padding-top:10px">
+<h2 style="font-size:1.0rem;margin-bottom:5px">Their metric vs. ours (same Transparent Utah data)</h2>
+<div class="pull-quote">
+    <p>"Any assertion that the Library's budget has increased to disproportionately favor managers/directors' wages is incorrect."</p>
+    <div class="attribution">— SLCPL Presentation to Board, July 27, 2026, Slide 10</div>
+  </div>
+
+<table style="table-layout:fixed;width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:9px;margin-bottom:6px">
+<colgroup><col style="width:12%"><col style="width:30%"><col style="width:1%"><col style="width:30%"><col style="width:27%"></colgroup>
+<thead><tr>
+<th style="background:#1E293B;color:white;padding:3px 6px">Year</th>
+<th style="background:#1E4D2B;color:#D1FAE5;padding:3px 6px;text-align:right">Top-10 % of total wages</th>
+<th style="background:#1E293B;padding:0"></th>
+<th style="background:#4C0519;color:#FCA5A5;padding:3px 6px;text-align:right">Leadership % of payroll</th>
+<th style="background:#4C0519;color:#FCA5A5;padding:3px 6px;text-align:right">Leader count</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2020</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">10.6%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">8.6%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(8)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2021</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">11.6%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">8.6%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(9)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2022</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">10.5%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">8.3%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(9)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2023</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">9.8%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">7.0%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(7)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2024</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">9.2%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">6.7%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(9)</td></tr>
+<tr style="font-weight:700;color:#B91C1C"><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2025</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">9.6%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">10.5%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(13)</td></tr>
+<tr style="font-weight:700;color:#B91C1C"><td style="padding:2px 6px">FY2026</td><td style="padding:2px 6px;text-align:right;background:#F0FDF4">8.8%</td><td style="background:#F1F5F9"></td><td style="padding:2px 6px;text-align:right;background:#FFF1F2">12.0%</td><td style="padding:2px 6px;text-align:right;background:#FFF1F2">(16)</td></tr>
+</tbody>
+<tfoot><tr><td colspan="5" style="padding:2px 6px;font-size:7.5px;color:#6B7280;border-top:1px solid #D1D5DB">Leadership = C-Suite + Director, ELT-inclusive (Bunting, Spehar, Chapman). Our figures: Transparent Utah actual salary. Their cited FY25/26 (9.2%/8.4%): internal budgeted wages.</td></tr></tfoot>
+</table>
+<table style="table-layout:fixed;width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:9px">
+<colgroup><col style="width:34%"><col style="width:22%"><col style="width:22%"><col style="width:22%"></colgroup>
+<thead><tr>
+<th style="background:#0F0F0F;color:white;padding:3px 6px;text-align:left">Transparent Utah FY2022&ndash;FY2026</th>
+<th style="background:#0F0F0F;color:white;padding:3px 6px;text-align:right">FY2022</th>
+<th style="background:#0F0F0F;color:white;padding:3px 6px;text-align:right">FY2026</th>
+<th style="background:#0F0F0F;color:white;padding:3px 6px;text-align:right">Change</th>
+</tr></thead>
+<tbody>
+<tr style="background:#FEF2F2"><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;font-weight:700;color:#B91C1C">Headcount — Leadership</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">9</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">16</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">+78%</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;color:#6B7280;padding-left:14px">All other tiers</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;color:#6B7280">375</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;color:#6B7280">351</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;color:#6B7280">&minus;7%</td></tr>
+<tr style="background:#FEF2F2"><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;font-weight:700;color:#B91C1C">Total comp — Leadership</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">$1.19M</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">$2.54M</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">+114%</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;color:#6B7280;padding-left:14px">All other tiers</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;color:#6B7280">$13.6M</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;color:#6B7280">$18.7M</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;color:#6B7280">+38%</td></tr>
+<tr style="background:#FEF2F2"><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;font-weight:700;color:#B91C1C">% of payroll — Leadership</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">8.3%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">12.0%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;font-weight:700;color:#B91C1C">+45%</td></tr>
+<tr><td style="padding:2px 6px;color:#6B7280;padding-left:14px">All other tiers</td><td style="padding:2px 6px;text-align:right;color:#6B7280">91.7%</td><td style="padding:2px 6px;text-align:right;color:#6B7280">88.0%</td><td style="padding:2px 6px;text-align:right;color:#6B7280">&minus;4%</td></tr>
+</tbody>
+</table>
+<p style="font-family:system-ui,sans-serif;font-size:8px;color:#64748B;margin-top:3px">Source: Transparent Utah FY2022-FY2026. ELT-inclusive. Total compensation = salary + benefits.</p>
+
+
+
+
+<p style="font-family:system-ui,sans-serif;font-size:9px;font-weight:600;color:#374151;margin-top:8px;margin-bottom:2px">Year-over-year % change — leadership vs. all other tiers</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 145" style="width:100%;display:block;font-family:system-ui,sans-serif">
+<line x1="38" y1="96.0" x2="474" y2="96.0" stroke="#475569" stroke-width="1"/>
+<line x1="38" y1="114.0" x2="474" y2="114.0" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="35" y="117.0" text-anchor="end" font-size="7" fill="#94A3B8">-20%</text>
+<line x1="38" y1="96.0" x2="474" y2="96.0" stroke="#475569" stroke-width="1"/>
+<text x="35" y="99.0" text-anchor="end" font-size="7" fill="#94A3B8">+0%</text>
+<line x1="38" y1="78.0" x2="474" y2="78.0" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="35" y="81.0" text-anchor="end" font-size="7" fill="#94A3B8">+20%</text>
+<line x1="38" y1="60.0" x2="474" y2="60.0" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="35" y="63.0" text-anchor="end" font-size="7" fill="#94A3B8">+40%</text>
+<line x1="38" y1="42.0" x2="474" y2="42.0" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="35" y="45.0" text-anchor="end" font-size="7" fill="#94A3B8">+60%</text>
+<line x1="38" y1="24.0" x2="474" y2="24.0" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="35" y="27.0" text-anchor="end" font-size="7" fill="#94A3B8">+80%</text>
+<text x="38.0" y="142" text-anchor="middle" font-size="7.5" fill="#475569">FY21</text>
+<text x="125.2" y="142" text-anchor="middle" font-size="7.5" fill="#475569">FY22</text>
+<text x="212.4" y="142" text-anchor="middle" font-size="7.5" fill="#475569">FY23</text>
+<text x="299.6" y="142" text-anchor="middle" font-size="7.5" fill="#475569">FY24</text>
+<text x="386.8" y="142" text-anchor="middle" font-size="7.5" fill="#475569">FY25</text>
+<text x="474.0" y="142" text-anchor="middle" font-size="7.5" fill="#475569">FY26</text>
+<polyline points="38.0,88.4 125.2,91.2 212.4,83.0 299.6,92.9 386.8,91.3 474.0,83.6" fill="none" stroke="#6B7280" stroke-width="1.2" stroke-linejoin="round"/>
+<circle cx="38.0" cy="88.4" r="2" fill="#6B7280"/>
+<circle cx="125.2" cy="91.2" r="2" fill="#6B7280"/>
+<circle cx="212.4" cy="83.0" r="2" fill="#6B7280"/>
+<circle cx="299.6" cy="92.9" r="2" fill="#6B7280"/>
+<circle cx="386.8" cy="91.3" r="2" fill="#6B7280"/>
+<circle cx="474.0" cy="83.6" r="2" fill="#6B7280"/>
+<polyline points="38.0,95.9 125.2,95.7 212.4,94.7 299.6,95.6 386.8,99.7 474.0,97.4" fill="none" stroke="#B0B7C3" stroke-width="1.0" stroke-linejoin="round" stroke-dasharray="3,2"/>
+<circle cx="38.0" cy="95.9" r="2" fill="#B0B7C3"/>
+<circle cx="125.2" cy="95.7" r="2" fill="#B0B7C3"/>
+<circle cx="212.4" cy="94.7" r="2" fill="#B0B7C3"/>
+<circle cx="299.6" cy="95.6" r="2" fill="#B0B7C3"/>
+<circle cx="386.8" cy="99.7" r="2" fill="#B0B7C3"/>
+<circle cx="474.0" cy="97.4" r="2" fill="#B0B7C3"/>
+<polyline points="38.0,96.5 125.2,99.2 212.4,109.8 299.6,100.6 386.8,43.8 474.0,83.5" fill="none" stroke="#7F1D1D" stroke-width="1.4" stroke-linejoin="round" stroke-dasharray="3,2"/>
+<circle cx="38.0" cy="96.5" r="2" fill="#7F1D1D"/>
+<circle cx="125.2" cy="99.2" r="2" fill="#7F1D1D"/>
+<circle cx="212.4" cy="109.8" r="2" fill="#7F1D1D"/>
+<circle cx="299.6" cy="100.6" r="2" fill="#7F1D1D"/>
+<circle cx="386.8" cy="43.8" r="2" fill="#7F1D1D"/>
+<circle cx="474.0" cy="83.5" r="2" fill="#7F1D1D"/>
+<polyline points="38.0,89.0 125.2,95.0 212.4,99.9 299.6,98.0 386.8,30.0 474.0,67.4" fill="none" stroke="#B91C1C" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="38.0" cy="89.0" r="2" fill="#B91C1C"/>
+<circle cx="125.2" cy="95.0" r="2" fill="#B91C1C"/>
+<circle cx="212.4" cy="99.9" r="2" fill="#B91C1C"/>
+<circle cx="299.6" cy="98.0" r="2" fill="#B91C1C"/>
+<circle cx="386.8" cy="30.0" r="2" fill="#B91C1C"/>
+<circle cx="474.0" cy="67.4" r="2" fill="#B91C1C"/>
+<text x="374.8" y="26.0" font-size="7" fill="#B91C1C" font-weight="700">+73%</text>
+<text transform="rotate(-90)" x="-69" y="10" text-anchor="middle" font-size="7" fill="#64748B">YoY %</text>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 14" style="width:100%;display:block;font-family:system-ui,sans-serif;margin-top:1px">
+<rect x="2" y="5" width="10" height="7" fill="#B91C1C" rx="1"/>
+<text x="15" y="12" font-size="7.5" fill="#B91C1C">Ldr comp</text>
+<line x1="124" y1="9" x2="134" y2="9" stroke="#7F1D1D" stroke-width="1.5" stroke-dasharray="3,2"/>
+<circle cx="129" cy="9" r="2" fill="#7F1D1D"/>
+<text x="137" y="12" font-size="7.5" fill="#7F1D1D">Ldr % pay</text>
+<rect x="246" y="5" width="10" height="7" fill="#6B7280" rx="1"/>
+<text x="259" y="12" font-size="7.5" fill="#6B7280">Other comp</text>
+<line x1="368" y1="9" x2="378" y2="9" stroke="#B0B7C3" stroke-width="1.5" stroke-dasharray="3,2"/>
+<circle cx="373" cy="9" r="2" fill="#B0B7C3"/>
+<text x="381" y="12" font-size="7.5" fill="#B0B7C3">Other % pay</text>
+</svg>
+<p style="font-family:system-ui,sans-serif;font-size:7.5px;color:#64748B;margin-top:1px">Solid = total comp. Dashed = % of payroll. Source: Transparent Utah, ELT-inclusive.</p>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+  <h2>Their math, step by step</h2>
+
+  <h3>The metric they used</h3>
+  <p>Top-10 employee salaries &divide; "Total Regular Wages Budgeted." Shown declining FY2019&rarr;FY2026.</p>
+
+  <div class="math-box"><span class="comment">Their formula:</span>
+
+  Top 10 employee salaries
+  ─────────────────────────────────  =  % concentration
+  Total regular wages budgeted
+
+  <span class="comment">Their result:</span>
+
+  FY2019:  $945,719  ÷  $8,740,400  =  <span class="highlight">10.8%</span>
+  FY2025:  $1,292,680  ÷  $14,093,586  =  <span class="highlight">9.2%</span>
+  FY2026:  $1,401,697  ÷  $16,738,447  =  <span class="highlight">8.4%</span>  ← declining, they say
+
+  <span class="comment">Source cited: Transparent Utah (FY2019 and FY2025 actuals)</span>
+  <span class="comment">Note: their FY2026 figure uses "budgeted wages," not Transparent Utah actuals.</span></div>
+
+  <h3>Three problems with this metric</h3>
+
+  <div class="problem-stack">
+    <div class="problem-card">
+      <div class="pc-label">Problem 1</div>
+      <div class="pc-title">Wrong question</div>
+      <div class="pc-claim">Their claim: Top-10 Salaries as % of total wages declining = no disproportionate growth</div>
+      <div class="pc-issue">This metric measures individual pay concentration, not tier growth. Adding 7 new $150K leadership roles makes this % go <em>down</em> because the denominator grows faster than the numerator. That is exactly what happened.</div>
+    </div>
+    <div class="problem-card">
+      <div class="pc-label">Problem 2</div>
+      <div class="pc-title">Mismatched denominator</div>
+      <div class="pc-claim">Their FY2026 denominator: $16,738,447 (labeled "Total Regular Wages Budgeted")</div>
+      <div class="pc-issue">"Total Regular Wages Budgeted" is an internal budget figure, not a number you can pull from <a href="https://old.transparent.utah.gov/entity_comp.php" target="_blank" style="color:var(--teal)">Transparent Utah</a>. The actual FY2026 salary total in Transparent Utah is $15,969,903 — a gap of <strong style="color:var(--red)">$768,544</strong>. They cite Transparent Utah as their source on slide 2 but their denominator does not come from it.</div>
+    </div>
+    <div class="problem-card">
+      <div class="pc-label">Problem 3</div>
+      <div class="pc-title">FY2026 data used without acknowledgment</div>
+      <div class="pc-claim">Slide 4: "FY26 data isn't in yet"</div>
+      <div class="pc-issue">Slide 10 uses FY2026 figures. The FY2026 data was live on <a href="https://old.transparent.utah.gov/entity_comp.php" target="_blank" style="color:var(--teal)">Transparent Utah</a> around the same time as this presentation. If the data was too preliminary to cite as a source, it was too preliminary to use as evidence. <a href="#fy26-roster" style="color:var(--teal)">Full roster below.</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+
+<section>
+  <h2>Their top-10 metric over time</h2>
+
+  <p>The same Transparent Utah data, every year available. Their presentation used FY2019, FY2025, and FY2026. Average compensation is the average total comp of the 10 highest-paid employees that year.</p>
+
+  <div class="tbl-wrap"><table style="table-layout:fixed;width:100%;border-collapse:collapse">
+<colgroup><col style="width:14%"><col style="width:29%"><col style="width:29%"><col style="width:28%"></colgroup>
+    <thead><tr>
+      <th style="background:#0F0F0F;color:white;padding:4px 7px;text-align:left">Year</th>
+      <th style="background:#0F0F0F;color:white;padding:4px 7px;text-align:right">Top-10 avg comp</th>
+      <th style="background:#0F0F0F;color:white;padding:4px 7px;text-align:right">Top-10 % of wages</th>
+      <th style="background:#0F0F0F;color:white;padding:4px 7px;text-align:right">Org avg comp</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>2020</td><td class="r">$134,128</td><td class="r">10.6%</td><td class="r">$33,625</td></tr>
+      <tr><td>2021</td><td class="r">$155,907</td><td class="r">11.6%</td><td class="r">$38,959</td></tr>
+      <tr><td>2022</td><td class="r">$152,351</td><td class="r">10.5%</td><td class="r">$37,265</td></tr>
+      <tr><td>2023</td><td class="r">$161,480</td><td class="r">9.8%</td><td class="r">$42,202</td></tr>
+      <tr><td>2024</td><td class="r">$156,072</td><td class="r">9.2%</td><td class="r">$41,032</td></tr>
+      <tr style="color:var(--red);font-weight:600"><td>2025</td><td class="r">$176,857</td><td class="r">9.6%</td><td class="r">$46,626</td></tr>
+      <tr style="color:var(--red);font-weight:600"><td>2026</td><td class="r">$188,723</td><td class="r">8.8%</td><td class="r">$57,771</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>The top-10 average comp rose 41% since 2020 ($134K &rarr; $189K). Org avg comp rose 72% ($34K &rarr; $58K), but remains 3.3&times; below the top-10 average. Their metric looks flat because both numerator and total payroll grew &mdash; it cannot show whether any single tier drove the increase.</p>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<section>
+  <h2>The same source. A different question.</h2>
+
+  <p>Same source. Different question: what happened to the <em>leadership tier</em> as a share of total payroll?</p>
+<table style="table-layout:fixed;width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:9px;margin-bottom:10px">
+<colgroup><col style="width:12%"><col style="width:30%"><col style="width:1%"><col style="width:30%"><col style="width:27%"></colgroup>
+<thead><tr>
+<th style="background:#1E293B;color:white;padding:3px 6px">Year</th>
+<th style="background:#1E4D2B;color:#D1FAE5;padding:3px 6px;text-align:right">Top-10 % of total wages</th>
+<th style="background:#1E293B;padding:0"></th>
+<th style="background:#4C0519;color:#FCA5A5;padding:3px 6px;text-align:right">Leadership % of payroll</th>
+<th style="background:#4C0519;color:#FCA5A5;padding:3px 6px;text-align:right">Leader count</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2020</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">10.6%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">8.6%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(8)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2021</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">11.6%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">8.6%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(9)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2022</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">10.5%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">8.3%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(9)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2023</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">9.8%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">7.0%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(7)</td></tr>
+<tr><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2024</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">9.2%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">6.7%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(9)</td></tr>
+<tr style="font-weight:700;color:#B91C1C"><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB">FY2025</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#F0FDF4">9.6%</td><td style="background:#F1F5F9;border-bottom:1px solid #D1D5DB"></td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">10.5%</td><td style="padding:2px 6px;border-bottom:1px solid #E5E7EB;text-align:right;background:#FFF1F2">(13)</td></tr>
+<tr style="font-weight:700;color:#B91C1C"><td style="padding:2px 6px">FY2026</td><td style="padding:2px 6px;text-align:right;background:#F0FDF4">8.8%</td><td style="background:#F1F5F9"></td><td style="padding:2px 6px;text-align:right;background:#FFF1F2">12.0%</td><td style="padding:2px 6px;text-align:right;background:#FFF1F2">(16)</td></tr>
+</tbody>
+<tfoot><tr><td colspan="5" style="padding:2px 6px;font-size:7.5px;color:#6B7280;border-top:1px solid #D1D5DB">Leadership = C-Suite + Director, ELT-inclusive. Our figures use Transparent Utah actual salary. Their cited FY25/FY26 values (9.2%/8.4%) used internal budgeted wages not on Transparent Utah.</td></tr></tfoot>
+</table>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="sc-label">Leadership % of payroll</div>
+      <div class="sc-val">8.3% → 12.0%</div>
+      <div class="sc-sub">FY22 to FY26, +45%. ELT-inclusive.</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Leadership headcount</div>
+      <div class="sc-val">9 → 16</div>
+      <div class="sc-sub">FY22 to FY26, +78%. ELT-inclusive. Total staff held at ~367 to 385.</div>
+    </div>
+    <div class="stat-card">
+      <div class="sc-label">Leadership total compensation</div>
+      <div class="sc-val">$1.19M → $2.54M</div>
+      <div class="sc-sub">FY22 to FY26, +114%. ELT-inclusive.</div>
+    </div>
+  </div>
+
+  
+
+  <div class="tbl-wrap"></div>
+</section>
+
+<!-- SECTION 4: TIER TABLE -->
+
+
+<section id="fy26-roster">
+  <h2>FY2026 leadership roster</h2>
+
+  <p style="font-size:13px;color:var(--slate);font-family:system-ui,sans-serif;margin-top:8px">Net Amount = salary paid. Benefits include employer-paid health insurance, retirement (URS), and other contributions. Total compensation = Net Amount + Benefits.</p>
+
+  
+  <div class="tbl-wrap">
+    <table style="table-layout:fixed;width:100%">
+      <div id="ldr-yr-nav" style="margin-bottom:10px"></div>
+<colgroup>
+        <col style="width:20%">
+        <col style="width:22%">
+        <col style="width:13%">
+        <col style="width:15%">
+        <col style="width:15%">
+        <col style="width:15%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Title</th>
+          <th class="r">Tier</th>
+          <th class="r">Salary</th>
+          <th class="r">Benefits</th>
+          <th class="r">Total Comp</th>
+        </tr>
+      </thead>
+      <tbody id="ldr-tb-26"></tbody>
+<tfoot id="ldr-tf-26"></tfoot>
+      
+    </table>
+  </div>
+
+  <div class="callout red" style="margin-top:16px">
+    16 people. $2,541,392 total compensation. 12.0% of the library's entire payroll. Source: Transparent Utah FY2026, the same source their presentation cites as authoritative.
+  </div>
+</section>
+
+<section>
+  <h2>The full picture by tier &mdash; FY2026 snapshot</h2>
+  <p>Every figure sourced to Transparent Utah, cited as authoritative on slide 2 of their presentation.</p>
+
+  <div class="tbl-controls">
+    
+    <span class="cnt" id="tier-cnt"></span>
+  </div>
+
+  <div class="tbl-wrap">
+    <div id="tier-yr-nav" style="margin-bottom:10px"></div>
+<table id="tier-tbl">
+      <thead>
+        <tr>
+          <th >Tier <span class="sort-arrow">↕</span></th>
+          <th  class="r">People <span class="sort-arrow">↕</span></th>
+          <th  class="r">Total Comp <span class="sort-arrow">↕</span></th>
+          <th  class="r">% of Comp <span class="sort-arrow">↕</span></th>
+          <th  class="r">Avg Comp <span class="sort-arrow">↕</span></th>
+        </tr>
+      </thead>
+      <tbody id="tier-tb"></tbody>
+<tfoot id="tier-tf"></tfoot>
+      <tbody id="roster-drawer-body">
+        <tr id="roster-drawer" class="roster-drawer"><td colspan="7"></td></tr>
+      </tbody>
+      
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top:12px">
+    Leadership = C-Suite + Director, plus Bunting, Spehar, and Chapman who served on the Executive Leadership Team in years where their titles read "Administrative Manager." C-Suite titles (CEO, COO, CFO) did not exist before FY2025. Click any tier row to see the full roster. Source: <a href="https://old.transparent.utah.gov/entity_comp.php" target="_blank" style="color:var(--teal)">Transparent Utah</a>
+  </div>
+
+<p style="font-family:system-ui,sans-serif;font-size:9px;font-weight:600;color:#374151;margin-top:8px;margin-bottom:2px">Each tier as % of total payroll, FY2020–FY2026</p><table style="table-layout:fixed;width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;margin-bottom:4px"><colgroup><col style="width:18%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:12%"><col style="width:10%"></colgroup><thead><tr><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:left">Tier</th><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:right">FY20</th><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:right">FY21</th><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:right">FY22</th><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:right">FY23</th><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:right">FY24</th><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:right">FY25</th><th style="background:#1E293B;color:white;padding:2px 5px;font-size:8px;text-align:right">FY26</th></tr></thead><tbody><tr><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px"><span class="tier-badge b-ldr" style="font-size:7px;padding:1px 3px">Leadership</span></td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#B91C1C;font-weight:700">8.6%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#B91C1C;font-weight:700">8.6%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#B91C1C;font-weight:700">8.3%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#B91C1C;font-weight:700">7.0%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#B91C1C;font-weight:700">6.7%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#B91C1C;font-weight:700">10.5%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#B91C1C;font-weight:700">12.0%</td></tr><tr><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px"><span class="tier-badge b-mgr" style="font-size:7px;padding:1px 3px">Manager</span></td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">23.2%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">23.5%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">23.2%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">23.6%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">25.4%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">21.5%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">17.6%</td></tr><tr><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px"><span class="tier-badge b-lib" style="font-size:7px;padding:1px 3px">Librarian</span></td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">29.3%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">29.4%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">29.3%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">29.4%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">28.0%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">28.3%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">27.1%</td></tr><tr><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px"><span class="tier-badge b-pro" style="font-size:7px;padding:1px 3px">Professional</span></td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">16.9%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">17.2%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">16.9%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">17.2%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">17.0%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">16.3%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">15.8%</td></tr><tr><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px"><span class="tier-badge b-ls" style="font-size:7px;padding:1px 3px">Library Staff</span></td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">14.4%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">13.2%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">14.4%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">13.2%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">13.7%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">12.3%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">14.9%</td></tr><tr><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px"><span class="tier-badge b-sup" style="font-size:7px;padding:1px 3px">Support & Ops</span></td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">10.8%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">12.4%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">10.8%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">12.4%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">10.9%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">11.1%</td><td style="padding:2px 5px;border-bottom:1px solid #E5E7EB;font-size:8px;text-align:right;color:#374151">12.7%</td></tr></tbody></table>
+<p style="font-family:system-ui,sans-serif;font-size:9px;font-weight:600;color:#374151;margin-top:8px;margin-bottom:2px">Share of total payroll — indexed to FY2024 (pre-restructuring = 100)</p><p style="font-family:system-ui,sans-serif;font-size:8.5px;color:#475569;margin-bottom:3px">All other tiers held within ±20% of their FY2024 level. Leadership grew 79% above it.</p>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 185" style="width:100%;font-family:system-ui,sans-serif">
+<rect x="46" y="103.2" width="456" height="19.6" fill="#F1F5F9" opacity="0.6"/>
+<line x1="46" y1="152.1" x2="502" y2="152.1" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="155.1" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">60</text>
+<line x1="46" y1="142.3" x2="502" y2="142.3" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="145.3" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">70</text>
+<line x1="46" y1="132.5" x2="502" y2="132.5" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="135.5" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">80</text>
+<line x1="46" y1="122.8" x2="502" y2="122.8" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="125.8" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">90</text>
+<line x1="46" y1="113.0" x2="502" y2="113.0" stroke="#64748B" stroke-width="1.2"/>
+<text x="43" y="116.0" text-anchor="end" font-size="7.5" fill="#475569" font-weight="700">100</text>
+<line x1="46" y1="103.2" x2="502" y2="103.2" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="106.2" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">110</text>
+<line x1="46" y1="93.4" x2="502" y2="93.4" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="96.4" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">120</text>
+<line x1="46" y1="83.6" x2="502" y2="83.6" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="86.6" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">130</text>
+<line x1="46" y1="73.8" x2="502" y2="73.8" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="76.8" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">140</text>
+<line x1="46" y1="64.0" x2="502" y2="64.0" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="67.0" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">150</text>
+<line x1="46" y1="54.2" x2="502" y2="54.2" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="57.2" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">160</text>
+<line x1="46" y1="44.5" x2="502" y2="44.5" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="47.5" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">170</text>
+<line x1="46" y1="34.7" x2="502" y2="34.7" stroke="#E5E7EB" stroke-width="0.5"/>
+<text x="43" y="37.7" text-anchor="end" font-size="7.5" fill="#94A3B8" font-weight="normal">180</text>
+<line x1="350.0" y1="20" x2="350.0" y2="157" stroke="#94A3B8" stroke-width="0.8" stroke-dasharray="3,3"/>
+<text x="350.0" y="15" text-anchor="middle" font-size="7" fill="#64748B">FY24 baseline</text>
+<text x="46.0" y="180" text-anchor="middle" font-size="8" fill="#475569">FY20</text>
+<text x="122.0" y="180" text-anchor="middle" font-size="8" fill="#475569">FY21</text>
+<text x="198.0" y="180" text-anchor="middle" font-size="8" fill="#475569">FY22</text>
+<text x="274.0" y="180" text-anchor="middle" font-size="8" fill="#475569">FY23</text>
+<text x="350.0" y="180" text-anchor="middle" font-size="8" fill="#475569">FY24</text>
+<text x="426.0" y="180" text-anchor="middle" font-size="8" fill="#475569">FY25</text>
+<text x="502.0" y="180" text-anchor="middle" font-size="8" fill="#475569">FY26</text>
+<polyline points="46.0,121.5 122.0,120.3 198.0,121.5 274.0,119.9 350.0,113.0 426.0,128.0 502.0,143.0" fill="none" stroke="#B45309" stroke-width="1" stroke-linejoin="round" opacity="0.55"/>
+<circle cx="46.0" cy="121.5" r="1.8" fill="#B45309" opacity="0.55"/>
+<circle cx="122.0" cy="120.3" r="1.8" fill="#B45309" opacity="0.55"/>
+<circle cx="198.0" cy="121.5" r="1.8" fill="#B45309" opacity="0.55"/>
+<circle cx="274.0" cy="119.9" r="1.8" fill="#B45309" opacity="0.55"/>
+<circle cx="350.0" cy="113.0" r="1.8" fill="#B45309" opacity="0.55"/>
+<circle cx="426.0" cy="128.0" r="1.8" fill="#B45309" opacity="0.55"/>
+<circle cx="502.0" cy="143.0" r="1.8" fill="#B45309" opacity="0.55"/>
+<polyline points="46.0,108.5 122.0,108.1 198.0,108.5 274.0,108.1 350.0,113.0 426.0,111.9 502.0,116.1" fill="none" stroke="#1D4ED8" stroke-width="1" stroke-linejoin="round" opacity="0.55"/>
+<circle cx="46.0" cy="108.5" r="1.8" fill="#1D4ED8" opacity="0.55"/>
+<circle cx="122.0" cy="108.1" r="1.8" fill="#1D4ED8" opacity="0.55"/>
+<circle cx="198.0" cy="108.5" r="1.8" fill="#1D4ED8" opacity="0.55"/>
+<circle cx="274.0" cy="108.1" r="1.8" fill="#1D4ED8" opacity="0.55"/>
+<circle cx="350.0" cy="113.0" r="1.8" fill="#1D4ED8" opacity="0.55"/>
+<circle cx="426.0" cy="111.9" r="1.8" fill="#1D4ED8" opacity="0.55"/>
+<circle cx="502.0" cy="116.1" r="1.8" fill="#1D4ED8" opacity="0.55"/>
+<polyline points="46.0,113.6 122.0,111.8 198.0,113.6 274.0,111.8 350.0,113.0 426.0,117.0 502.0,119.9" fill="none" stroke="#6D28D9" stroke-width="1" stroke-linejoin="round" opacity="0.55"/>
+<circle cx="46.0" cy="113.6" r="1.8" fill="#6D28D9" opacity="0.55"/>
+<circle cx="122.0" cy="111.8" r="1.8" fill="#6D28D9" opacity="0.55"/>
+<circle cx="198.0" cy="113.6" r="1.8" fill="#6D28D9" opacity="0.55"/>
+<circle cx="274.0" cy="111.8" r="1.8" fill="#6D28D9" opacity="0.55"/>
+<circle cx="350.0" cy="113.0" r="1.8" fill="#6D28D9" opacity="0.55"/>
+<circle cx="426.0" cy="117.0" r="1.8" fill="#6D28D9" opacity="0.55"/>
+<circle cx="502.0" cy="119.9" r="1.8" fill="#6D28D9" opacity="0.55"/>
+<polyline points="46.0,108.0 122.0,116.5 198.0,108.0 274.0,116.5 350.0,113.0 426.0,122.9 502.0,104.4" fill="none" stroke="#166534" stroke-width="1" stroke-linejoin="round" opacity="0.55"/>
+<circle cx="46.0" cy="108.0" r="1.8" fill="#166534" opacity="0.55"/>
+<circle cx="122.0" cy="116.5" r="1.8" fill="#166534" opacity="0.55"/>
+<circle cx="198.0" cy="108.0" r="1.8" fill="#166534" opacity="0.55"/>
+<circle cx="274.0" cy="116.5" r="1.8" fill="#166534" opacity="0.55"/>
+<circle cx="350.0" cy="113.0" r="1.8" fill="#166534" opacity="0.55"/>
+<circle cx="426.0" cy="122.9" r="1.8" fill="#166534" opacity="0.55"/>
+<circle cx="502.0" cy="104.4" r="1.8" fill="#166534" opacity="0.55"/>
+<polyline points="46.0,113.8 122.0,99.5 198.0,113.8 274.0,99.5 350.0,113.0 426.0,111.2 502.0,96.8" fill="none" stroke="#6B7280" stroke-width="1" stroke-linejoin="round" opacity="0.55"/>
+<circle cx="46.0" cy="113.8" r="1.8" fill="#6B7280" opacity="0.55"/>
+<circle cx="122.0" cy="99.5" r="1.8" fill="#6B7280" opacity="0.55"/>
+<circle cx="198.0" cy="113.8" r="1.8" fill="#6B7280" opacity="0.55"/>
+<circle cx="274.0" cy="99.5" r="1.8" fill="#6B7280" opacity="0.55"/>
+<circle cx="350.0" cy="113.0" r="1.8" fill="#6B7280" opacity="0.55"/>
+<circle cx="426.0" cy="111.2" r="1.8" fill="#6B7280" opacity="0.55"/>
+<circle cx="502.0" cy="96.8" r="1.8" fill="#6B7280" opacity="0.55"/>
+<polyline points="46.0,85.2 122.0,85.2 198.0,89.6 274.0,108.6 350.0,113.0 426.0,57.5 502.0,35.6" fill="none" stroke="#B91C1C" stroke-width="2.8" stroke-linejoin="round"/>
+<circle cx="46.0" cy="85.2" r="3.5" fill="#B91C1C"/>
+<circle cx="122.0" cy="85.2" r="3.5" fill="#B91C1C"/>
+<circle cx="198.0" cy="89.6" r="3.5" fill="#B91C1C"/>
+<circle cx="274.0" cy="108.6" r="3.5" fill="#B91C1C"/>
+<circle cx="350.0" cy="113.0" r="3.5" fill="#B91C1C"/>
+<circle cx="426.0" cy="57.5" r="3.5" fill="#B91C1C"/>
+<circle cx="502.0" cy="35.6" r="3.5" fill="#B91C1C"/>
+
+
+<text transform="rotate(-90)" x="-88" y="11" text-anchor="middle" font-size="7.5" fill="#64748B">Index (FY2024=100)</text>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 16" style="width:100%;font-family:system-ui,sans-serif;margin-top:2px">
+<rect x="0" y="5" width="12" height="6" fill="#B91C1C" rx="1"/>
+<text x="15" y="11" font-size="8" fill="#B91C1C" font-weight="700">Leadership</text>
+<line x1="82.0" y1="8" x2="94.0" y2="8" stroke="#B45309" stroke-width="1"/>
+<circle cx="88.0" cy="8" r="2" fill="#B45309"/>
+<text x="97.0" y="11" font-size="8" fill="#B45309" font-weight="400">Manager</text>
+<line x1="141.8" y1="8" x2="153.8" y2="8" stroke="#1D4ED8" stroke-width="1"/>
+<circle cx="147.8" cy="8" r="2" fill="#1D4ED8"/>
+<text x="156.8" y="11" font-size="8" fill="#1D4ED8" font-weight="400">Librarian</text>
+<line x1="212.4" y1="8" x2="224.4" y2="8" stroke="#6D28D9" stroke-width="1"/>
+<circle cx="218.4" cy="8" r="2" fill="#6D28D9"/>
+<text x="227.4" y="11" font-size="8" fill="#6D28D9" font-weight="400">Professional</text>
+<line x1="299.20000000000005" y1="8" x2="311.20000000000005" y2="8" stroke="#166534" stroke-width="1"/>
+<circle cx="305.20000000000005" cy="8" r="2" fill="#166534"/>
+<text x="314.20000000000005" y="11" font-size="8" fill="#166534" font-weight="400">Library Staff</text>
+<line x1="391.40000000000003" y1="8" x2="403.40000000000003" y2="8" stroke="#6B7280" stroke-width="1"/>
+<circle cx="397.40000000000003" cy="8" r="2" fill="#6B7280"/>
+<text x="406.40000000000003" y="11" font-size="8" fill="#6B7280" font-weight="400">Support & Ops</text>
+</svg>
+<p style="font-family:system-ui,sans-serif;font-size:7.5px;color:#64748B;margin-top:2px">FY2024 = last year before restructuring. Shaded band: ±10% of baseline. Source: Transparent Utah, ELT-inclusive.</p>
+</section>
+
+<!-- SECTION 5: FY26 DATA -->
+
+<!-- SECTION 6: WHAT WASN'T SHOWN -->
+<section>
+  <h2>Their budget growth metric</h2>
+
+  <div class="pull-quote">
+    <p>"6% Net Expenditure Increase"</p>
+    <div class="attribution">— SLCPL Presentation to Board, July 27, 2026, Slide 3. FY2019 ($22.3M) to FY2025 ($36.3M).</div>
+  </div>
+
+  <p>The actual total growth is <strong>+62.8%</strong>. Here is how they arrived at 6%, and what it omits.</p>
+
+  <div class="math-box"><span class="comment">Their formula (reverse-engineered):</span>
+
+FY2025 actuals:                       $36.3M
+minus pass-throughs:               &minus; $5.0M
+<span class="good">Adjusted FY2025:                      $31.3M</span>
+
+($31.3M &divide; $22.3M) ^ (1 &divide; 6) &minus; 1  =  <span class="good">5.8%</span>  &rarr;  "6%"
+
+<span class="comment">This formula is called CAGR: Compound Annual Growth Rate.
+It answers: if growth had been perfectly smooth, what % would each year add?
+The (1 &divide; 6) exponent converts 6 years of total growth into a per-year rate.
+CAGR is a legitimate measure. It is also the smallest defensible number
+you can attach to a 62.8% total increase.</span>
+
+<span class="comment">The pass-through adjustment is disclosed on slide 2.</span></div>
+
+  <p>Why net-to-net is still misleading: stripping pass-throughs from FY2025 but not from FY2019 makes the starting point look smaller than the end point relative to the same basis. Applied consistently to both years, total growth is still +40.4% and CAGR is still 5.8%. Even their own adjustment, done fairly, produces the same rate. The issue is presenting that rate without the +40% total or any inflation context.</p>
+
+  <div class="tbl-wrap"><table style="table-layout:fixed;width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:9.5px;margin:10px 0"><colgroup><col style="width:28%"><col style="width:18%"><col style="width:18%"><col style="width:36%"></colgroup>
+<thead><tr>
+<th style="background:#1E293B;color:white;padding:4px 7px;text-align:left">Basis</th>
+<th style="background:#1E293B;color:white;padding:4px 7px;text-align:right">Total growth</th>
+<th style="background:#1E293B;color:white;padding:4px 7px;text-align:right">Annual rate</th>
+<th style="background:#1E293B;color:white;padding:4px 7px;text-align:left">How calculated</th>
+</tr></thead>
+<tbody>
+<tr style="background:#FEF2F2"><td style="padding:4px 7px;font-weight:600;color:#B91C1C">Unadjusted (same basis, both years)</td><td style="padding:4px 7px;text-align:right;font-weight:700;color:#B91C1C">+62.8%</td><td style="padding:4px 7px;text-align:right;font-weight:600;color:#B91C1C">+8.5%/yr</td><td style="padding:4px 7px;color:#B91C1C;font-family:monospace;font-size:8.5px">($36.3M &minus; $22.3M) &divide; $22.3M</td></tr>
+<tr><td style="padding:4px 7px;color:#374151">Their figure (pass-throughs stripped from FY25 only)</td><td style="padding:4px 7px;text-align:right;color:#374151">+40.4%</td><td style="padding:4px 7px;text-align:right;font-weight:700;color:#374151">~6%/yr</td><td style="padding:4px 7px;color:#6B7280;font-family:monospace;font-size:8.5px">($31.3M &minus; $22.3M) &divide; $22.3M</td></tr>
+<tr><td style="padding:4px 7px;color:#475569">US inflation, same period (CPI-U)</td><td style="padding:4px 7px;text-align:right;color:#475569">+22.8%</td><td style="padding:4px 7px;text-align:right;color:#475569">+3.5%/yr</td><td style="padding:4px 7px;color:#6B7280;font-size:8.5px">BLS CPI-U, FY2019&ndash;FY2025</td></tr>
+<tr style="background:#F0FDF4"><td style="padding:4px 7px;color:#166534;font-weight:600">Real growth (inflation-adjusted)</td><td style="padding:4px 7px;text-align:right;color:#166534;font-weight:700">+32.6%</td><td style="padding:4px 7px;text-align:right;color:#166534;font-weight:600">+4.8%/yr</td><td style="padding:4px 7px;color:#166534;font-family:monospace;font-size:8.5px">((1.628 &divide; 1.228) &minus; 1) &times; 100</td></tr>
+</tbody>
+</table></div>
+
+  <p>The pass-through adjustment is legitimate. Transparent Utah does double-count capital and debt service. Applied consistently to both years, total growth is still +40%. The 6% figure survives a fair adjustment. The +62.8% total and the inflation gap do not appear anywhere in their presentation.</p>
+</section>
+<section style="page-break-before:always">
+  <h2>What the presentation did not address</h2>
+
+  <h3>The compensation study</h3>
+  <p>The CEO's FY27 budget letter cites a "2025 third-party compensation study" as the basis for the restructuring and 5.5% COLA. It has never been published, presented in a public board session, or posted to the library's website. Mr. Baskett was hired as Executive Director; his title later changed to CEO and Library Director. The study was conducted after that title change. No one outside the organization can evaluate its assumptions.</p>
+
+  <h3>The employee satisfaction survey</h3>
+  <p>Multiple current employees report the survey is no longer anonymous and that questions have changed in ways that shape results. The ask: run it anonymously, consistent questions, publish the results.</p>
+</section>
+
+<footer>
+  <p style="font-weight:700;margin-bottom:10px;font-family:system-ui,sans-serif;font-size:13px">Sources</p>
+  <ul style="font-family:system-ui,sans-serif;font-size:12px;color:var(--slate);line-height:1.7;padding-left:18px;margin-bottom:16px">
+    <li>Payroll data: <a href="https://old.transparent.utah.gov/entity_comp.php" target="_blank" style="color:var(--teal)">Transparent Utah</a>, FY2022&ndash;FY2026, 367&ndash;407 employees per year</li>
+    <li>Budget figures: Eide Bailly LLP audited financials FY22&ndash;FY25 and SLCPL FY27 Proposed Budget</li>
+    <li>CEO denial: City Cast Salt Lake, "SLC Library Staff Are Getting Paid To Quit. Why?" (June 3, 2026, approximately 31:09)</li>
+    <li>Board presentation being rebutted: SLCPL, "Historical Budget Growth for Board 7.27.26" (July 27, 2026)</li>
+    <li>Inflation figure: US Bureau of Labor Statistics, CPI-U cumulative change FY2019&ndash;FY2025</li>
+  </ul>
+  <a href="Dashboard.html" style="font-family:system-ui,sans-serif;font-size:13px;color:var(--teal);font-weight:600">View full interactive data dashboard &rarr;</a>
+</footer>
+
+
+
+<script>
+const AYC_DATA = {
+  '2020': {
+    '_total':           { people: 375,   salary: 9237265,   comp: 12609232,   pctSal: 100.0,  pctComp: 100.0  },
+    'Leadership':      { people: 8,   salary: 803620,   comp: 1090277,   pctSal: 8.7,  pctComp: 8.6  },
+    'Manager':         { people: 30,   salary: 1816299,   comp: 2605785,   pctSal: 19.7,  pctComp: 20.7  },
+    'Librarian':       { people: 103,   salary: 2929555,   comp: 4031538,   pctSal: 31.7,  pctComp: 32.0  },
+    'Professional':    { people: 30,   salary: 1247558,   comp: 1812928,   pctSal: 13.5,  pctComp: 14.4  },
+    'Library Staff':   { people: 149,   salary: 1432452,   comp: 1695949,   pctSal: 15.5,  pctComp: 13.5  },
+    'Support & Ops':   { people: 55,   salary: 1007782,   comp: 1372755,   pctSal: 10.9,  pctComp: 10.9  },
+  },
+  '2021': {
+    '_total':           { people: 351,   salary: 10079128,   comp: 13674674,   pctSal: 100.0,  pctComp: 100.0  },
+    'Leadership':      { people: 9,   salary: 879290,   comp: 1175588,   pctSal: 8.7,  pctComp: 8.6  },
+    'Manager':         { people: 32,   salary: 2117178,   comp: 2956953,   pctSal: 21.0,  pctComp: 21.6  },
+    'Librarian':       { people: 91,   salary: 2899169,   comp: 3999374,   pctSal: 28.8,  pctComp: 29.2  },
+    'Professional':    { people: 30,   salary: 1599292,   comp: 2284533,   pctSal: 15.9,  pctComp: 16.7  },
+    'Library Staff':   { people: 132,   salary: 1441282,   comp: 1719391,   pctSal: 14.3,  pctComp: 12.6  },
+    'Support & Ops':   { people: 57,   salary: 1142918,   comp: 1538834,   pctSal: 11.3,  pctComp: 11.3  },
+  },
+  '2022': {
+    '_total':           { people: 385,   salary: 10579909,   comp: 14346934,   pctSal: 100.0,  pctComp: 100.0  },
+    'Leadership':      { people: 9,   salary: 882762,   comp: 1188854,   pctSal: 8.3,  pctComp: 8.3  },
+    'Manager':         { people: 33,   salary: 2044522,   comp: 2907462,   pctSal: 19.3,  pctComp: 20.3  },
+    'Librarian':       { people: 97,   salary: 3082723,   comp: 4207909,   pctSal: 29.1,  pctComp: 29.3  },
+    'Professional':    { people: 31,   salary: 1716284,   comp: 2421776,   pctSal: 16.2,  pctComp: 16.9  },
+    'Library Staff':   { people: 156,   salary: 1725515,   comp: 2069780,   pctSal: 16.3,  pctComp: 14.4  },
+    'Support & Ops':   { people: 59,   salary: 1128103,   comp: 1551153,   pctSal: 10.7,  pctComp: 10.8  },
+  },
+  '2023': {
+    '_total':           { people: 384,   salary: 11966578,   comp: 16205577,   pctSal: 100.0,  pctComp: 100.0  },
+    'Leadership':      { people: 7,   salary: 832098,   comp: 1137654,   pctSal: 7.0,  pctComp: 7.0  },
+    'Manager':         { people: 38,   salary: 2393970,   comp: 3365919,   pctSal: 20.0,  pctComp: 20.8  },
+    'Librarian':       { people: 98,   salary: 3495832,   comp: 4768714,   pctSal: 29.2,  pctComp: 29.4  },
+    'Professional':    { people: 33,   salary: 1984505,   comp: 2786474,   pctSal: 16.6,  pctComp: 17.2  },
+    'Library Staff':   { people: 152,   salary: 1787258,   comp: 2144090,   pctSal: 14.9,  pctComp: 13.2  },
+    'Support & Ops':   { people: 56,   salary: 1472915,   comp: 2002726,   pctSal: 12.3,  pctComp: 12.4  },
+  },
+  '2024': {
+    '_total':           { people: 407,   salary: 12200493,   comp: 16700024,   pctSal: 100.0,  pctComp: 100.0  },
+    'Leadership':      { people: 9,   salary: 811650,   comp: 1112802,   pctSal: 6.7,  pctComp: 6.7  },
+    'Manager':         { people: 41,   salary: 2797849,   comp: 3960281,   pctSal: 22.9,  pctComp: 23.7  },
+    'Librarian':       { people: 98,   salary: 3380396,   comp: 4668691,   pctSal: 27.7,  pctComp: 28.0  },
+    'Professional':    { people: 39,   salary: 2012488,   comp: 2843994,   pctSal: 16.5,  pctComp: 17.0  },
+    'Library Staff':   { people: 164,   salary: 1874423,   comp: 2293008,   pctSal: 15.4,  pctComp: 13.7  },
+    'Support & Ops':   { people: 56,   salary: 1323686,   comp: 1821248,   pctSal: 10.8,  pctComp: 10.9  },
+  },
+  '2025': {
+    '_total':           { people: 393,   salary: 13479019,   comp: 18323919,   pctSal: 100.0,  pctComp: 100.0  },
+    'Leadership':      { people: 13,   salary: 1436378,   comp: 1928918,   pctSal: 10.7,  pctComp: 10.5  },
+    'Manager':         { people: 40,   salary: 2809455,   comp: 3937248,   pctSal: 20.8,  pctComp: 21.5  },
+    'Librarian':       { people: 96,   salary: 3754394,   comp: 5178361,   pctSal: 27.9,  pctComp: 28.3  },
+    'Professional':    { people: 38,   salary: 2119419,   comp: 2983478,   pctSal: 15.7,  pctComp: 16.3  },
+    'Library Staff':   { people: 157,   salary: 1893677,   comp: 2261524,   pctSal: 14.0,  pctComp: 12.3  },
+    'Support & Ops':   { people: 49,   salary: 1465696,   comp: 2034389,   pctSal: 10.9,  pctComp: 11.1  },
+  },
+  '2026': {
+    '_total':           { people: 367,   salary: 15969903,   comp: 21201799,   pctSal: 100.0,  pctComp: 100.0  },
+    'Leadership':      { people: 16,   salary: 1937186,   comp: 2541392,   pctSal: 12.1,  pctComp: 12.0  },
+    'Manager':         { people: 35,   salary: 2732438,   comp: 3722399,   pctSal: 17.1,  pctComp: 17.6  },
+    'Librarian':       { people: 91,   salary: 4234972,   comp: 5752308,   pctSal: 26.5,  pctComp: 27.1  },
+    'Professional':    { people: 39,   salary: 2436948,   comp: 3347395,   pctSal: 15.3,  pctComp: 15.8  },
+    'Library Staff':   { people: 140,   salary: 2681693,   comp: 3155533,   pctSal: 16.8,  pctComp: 14.9  },
+    'Support & Ops':   { people: 46,   salary: 1946665,   comp: 2682771,   pctSal: 12.2,  pctComp: 12.7  },
+  },
+};
+const LDR_ROSTER = {"2020": [{"n": "BROMBERG, PETER JONATHAN", "t": "Executive Director Library", "tier": "C-Suite", "s": 145227, "b": 53365, "total": 198592}, {"n": "EHRMAN, DEBORAH C", "t": "Acting Executive Director", "tier": "Director", "s": 117692, "b": 45223, "total": 162915}, {"n": "BRADBERRY, GORDON DOLAN", "t": "Assistant Director of Facilities and IT", "tier": "Director", "s": 104984, "b": 35242, "total": 140226}, {"n": "BUNTING, JACE P", "t": "Administrative Manager", "tier": "Director", "s": 103322, "b": 35310, "total": 138632}, {"n": "CHAPMAN, RUBY MICHELLE", "t": "Administrative Manager", "tier": "Director", "s": 86194, "b": 30161, "total": 116355}, {"n": "MOON, MARILEE", "t": "Assistant Director of Customer Experience", "tier": "Director", "s": 84241, "b": 30256, "total": 114497}, {"n": "MCQUEEN, QUINN A", "t": "Assistant Director of Marketing & Comm", "tier": "Director", "s": 82205, "b": 28245, "total": 110450}, {"n": "JACOBSON, ANNALISA", "t": "Acting Deputy Director", "tier": "Director", "s": 79755, "b": 28855, "total": 108610}], "2021": [{"n": "BROMBERG, PETER JONATHAN", "t": "Executive Director Library", "tier": "C-Suite", "s": 152242, "b": 39753, "total": 191996}, {"n": "EHRMAN, DEBORAH C", "t": "Acting Executive Director", "tier": "Director", "s": 125978, "b": 47033, "total": 173010}, {"n": "BRADBERRY, GORDON DOLAN", "t": "Assistant Director of Facilities and IT", "tier": "Director", "s": 113530, "b": 41850, "total": 155379}, {"n": "BUNTING, JACE P", "t": "Administrative Manager", "tier": "Director", "s": 111749, "b": 37280, "total": 149028}, {"n": "CHAPMAN, RUBY MICHELLE", "t": "Administrative Manager", "tier": "Director", "s": 94990, "b": 32603, "total": 127593}, {"n": "MCQUEEN, QUINN A", "t": "Assistant Director of Marketing & Comm", "tier": "Director", "s": 95195, "b": 31146, "total": 126342}, {"n": "JACOBSON, ANNALISA", "t": "Acting Deputy Director", "tier": "Director", "s": 92369, "b": 31837, "total": 124206}, {"n": "MOON, MARILEE", "t": "Assistant Director of Customer Experience", "tier": "Director", "s": 58038, "b": 20828, "total": 78866}, {"n": "SPEHAR, ALLISON C", "t": "Administrative Manager", "tier": "Director", "s": 35200, "b": 13968, "total": 49168}], "2022": [{"n": "EHRMAN, DEBORAH C", "t": "Acting Executive Director", "tier": "Director", "s": 153861, "b": 55122, "total": 208983}, {"n": "BRADBERRY, GORDON DOLAN", "t": "Assistant Director of Facilities and IT", "tier": "Director", "s": 119812, "b": 42020, "total": 161831}, {"n": "BUNTING, JACE P", "t": "Administrative Manager", "tier": "Director", "s": 117968, "b": 39312, "total": 157279}, {"n": "JACOBSON, ANNALISA", "t": "Acting Deputy Director", "tier": "Director", "s": 111971, "b": 37398, "total": 149369}, {"n": "MCQUEEN, QUINN A", "t": "Assistant Director of Marketing & Comm", "tier": "Director", "s": 106048, "b": 34230, "total": 140278}, {"n": "CHAPMAN, RUBY MICHELLE", "t": "Administrative Manager", "tier": "Director", "s": 100685, "b": 34427, "total": 135112}, {"n": "SPEHAR, ALLISON C", "t": "Administrative Manager", "tier": "Director", "s": 87879, "b": 35016, "total": 122894}, {"n": "REHBEHN, DANIEL L", "t": "Assistant Director of Customer Experience", "tier": "Director", "s": 84539, "b": 36648, "total": 121186}, {"n": "MOON, MARILEE", "t": "Assistant Director of Customer Experience", "tier": "Director", "s": 0, "b": -8079, "total": -8079}], "2023": [{"n": "EHRMAN, DEBORAH C", "t": "Acting Executive Director", "tier": "Director", "s": 160852, "b": 57276, "total": 218128}, {"n": "BUNTING, JACE P", "t": "Administrative Manager", "tier": "Director", "s": 123299, "b": 40524, "total": 163823}, {"n": "BRADBERRY, GORDON DOLAN", "t": "Assistant Director of Facilities and IT", "tier": "Director", "s": 123318, "b": 40315, "total": 163633}, {"n": "CHAPMAN, RUBY MICHELLE", "t": "Administrative Manager", "tier": "Director", "s": 110515, "b": 48388, "total": 158903}, {"n": "MCQUEEN, QUINN A", "t": "Assistant Director of Marketing & Comm", "tier": "Director", "s": 115977, "b": 36540, "total": 152517}, {"n": "REHBEHN, DANIEL L", "t": "Assistant Director of Customer Experience", "tier": "Director", "s": 101746, "b": 44729, "total": 146475}, {"n": "SPEHAR, ALLISON C", "t": "Administrative Manager", "tier": "Director", "s": 96391, "b": 37785, "total": 134176}], "2024": [{"n": "EHRMAN, DEBORAH C", "t": "Acting Executive Director", "tier": "Director", "s": 165446, "b": 60605, "total": 226051}, {"n": "CHAPMAN, RUBY MICHELLE", "t": "Administrative Manager", "tier": "Director", "s": 114720, "b": 52315, "total": 167035}, {"n": "REHBEHN, DANIEL L", "t": "Assistant Director of Customer Experience", "tier": "Director", "s": 112936, "b": 50356, "total": 163292}, {"n": "MCQUEEN, QUINN A", "t": "Assistant Director of Marketing & Comm", "tier": "Director", "s": 109154, "b": 35950, "total": 145104}, {"n": "BASKETT, NOAH", "t": "Executive Director Library", "tier": "C-Suite", "s": 93862, "b": 32452, "total": 126314}, {"n": "BAHR, TYLER D", "t": "Assistant Director", "tier": "Director", "s": 80137, "b": 25254, "total": 105391}, {"n": "BRADBERRY, GORDON DOLAN", "t": "Assistant Director of Facilities and IT", "tier": "Director", "s": 55248, "b": 17108, "total": 72356}, {"n": "BUNTING, JACE P", "t": "Administrative Manager", "tier": "Director", "s": 40556, "b": 13676, "total": 54232}, {"n": "SPEHAR, ALLISON C", "t": "Administrative Manager", "tier": "Director", "s": 39590, "b": 13436, "total": 53026}], "2025": [{"n": "BASKETT, NOAH", "t": "CEO - Executive Director Library", "tier": "C-Suite", "s": 185390, "b": 66329, "total": 251719}, {"n": "EHRMAN, DEBORAH C", "t": "Chief Operations Officer", "tier": "C-Suite", "s": 173526, "b": 61307, "total": 234833}, {"n": "BAHR, TYLER D", "t": "Chief Financial Officer", "tier": "C-Suite", "s": 132622, "b": 40889, "total": 173512}, {"n": "REHBEHN, DANIEL L", "t": "Chief Service and Impact Officer", "tier": "C-Suite", "s": 120657, "b": 51334, "total": 171990}, {"n": "CHAPMAN, RUBY MICHELLE", "t": "Dir of Employee Engagement", "tier": "Director", "s": 120009, "b": 39534, "total": 159543}, {"n": "MCQUEEN, QUINN A", "t": "Director of Marketing & Communications", "tier": "Director", "s": 119356, "b": 37486, "total": 156842}, {"n": "CORRINGTON, DAVID L", "t": "Director of Safety", "tier": "Director", "s": 108843, "b": 42865, "total": 151707}, {"n": "EWING, MARK E.", "t": "Director of Public Services", "tier": "Director", "s": 101802, "b": 35422, "total": 137224}, {"n": "CAMPOLUCCI, NICOLE", "t": "Director of Safety and Social Services", "tier": "Director", "s": 103482, "b": 26104, "total": 129585}, {"n": "ROMRIELL, DEANNA M", "t": "Director of Community Engagement", "tier": "Director", "s": 95206, "b": 33525, "total": 128731}, {"n": "CHRISTENSEN, RITA A", "t": "Dir of Organizational Learning", "tier": "Director", "s": 92498, "b": 22506, "total": 115004}, {"n": "MASON, MARGARET", "t": "Chief People Officer", "tier": "C-Suite", "s": 58660, "b": 25577, "total": 84237}, {"n": "SWEENEY, JESSICA M", "t": "Chief Development Officer", "tier": "C-Suite", "s": 24328, "b": 9662, "total": 33990}], "2026": [{"n": "BASKETT, NOAH", "t": "CEO - Executive Director Library", "tier": "C-Suite", "s": 186514, "b": 63201, "total": 249714}, {"n": "REHBEHN, DANIEL L", "t": "Chief Service and Impact Officer", "tier": "C-Suite", "s": 182745, "b": 51881, "total": 234626}, {"n": "MOORE, JUDY", "t": "Chief Operations Officer", "tier": "C-Suite", "s": 144489, "b": 48052, "total": 192541}, {"n": "BAHR, TYLER D", "t": "Chief Financial Officer", "tier": "C-Suite", "s": 144277, "b": 41848, "total": 186124}, {"n": "MASON, MARGARET", "t": "Chief People Officer", "tier": "C-Suite", "s": 131221, "b": 50635, "total": 181856}, {"n": "SWEENEY, JESSICA M", "t": "Chief Development Officer", "tier": "C-Suite", "s": 122901, "b": 50550, "total": 173452}, {"n": "CHAPMAN, RUBY MICHELLE", "t": "Director of Finance", "tier": "Director", "s": 130826, "b": 40573, "total": 171399}, {"n": "MCQUEEN, QUINN A", "t": "Director of Marketing & Communications", "tier": "Director", "s": 129473, "b": 36893, "total": 166367}, {"n": "EWING, MARK E.", "t": "Director of Public Services", "tier": "Director", "s": 111168, "b": 35965, "total": 147133}, {"n": "CAMPOLUCCI, NICOLE", "t": "Director of Safety and Social Services", "tier": "Director", "s": 116398, "b": 28124, "total": 144522}, {"n": "YOUNG, BROOKE A", "t": "Director of Public Services", "tier": "Director", "s": 107470, "b": 35059, "total": 142530}, {"n": "ROMRIELL, DEANNA M", "t": "Director of Community Engagement", "tier": "Director", "s": 103974, "b": 34024, "total": 137998}, {"n": "CHRISTENSEN, RITA A", "t": "Dir of Organizational Learning", "tier": "Director", "s": 102852, "b": 24113, "total": 126965}, {"n": "HERNANDEZ, LANA", "t": "Director of Employee Relations", "tier": "Director", "s": 93245, "b": 21840, "total": 115084}, {"n": "MCCULLOCK, ALLISON K", "t": "Interim Library Marketing Director", "tier": "Director", "s": 80657, "b": 30591, "total": 111247}, {"n": "EHRMAN, DEBORAH C", "t": "Chief Operations Officer", "tier": "C-Suite", "s": 48978, "b": 10857, "total": 59835}]};
+
+const TIER_ORDER = ['Leadership','Manager','Librarian','Professional','Library Staff','Support & Ops'];
+const BCLS = {
+  'Leadership':    'b-ldr',
+  'Manager':       'b-mgr',
+  'Librarian':     'b-lib',
+  'Professional':  'b-pro',
+  'Library Staff': 'b-ls',
+  'Support & Ops': 'b-sup',
+};
+
+
+let currentYr = '2026', sortCol = -1, sortDir = 1;
+let openTier = null;
+
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+function pct(n) { return n.toFixed(1) + '%'; }
+
+function buildRosterHTML(tier, yr) {
+  const data = AYC_DATA[yr] && AYC_DATA[yr][tier];
+  if (!data) return '';
+  
+  // Leadership: show full roster from embedded data
+  if (tier === 'Leadership') {
+    const emps = (LDR_ROSTER[yr]) || [];
+    const totalComp = emps.reduce((s,e) => s+e.total, 0);
+    const totalSal  = emps.reduce((s,e) => s+e.s, 0);
+    const rows = emps.map(e => {
+      const bc = e.tier === 'C-Suite' ? 'b-cs' : 'b-dir';
+      return `<tr>
+        <td>${e.n}</td>
+        <td style="color:#475569">${e.t}</td>
+        <td style="text-align:right"><span class="tier-badge ${bc}" style="font-size:10px">${e.tier}</span></td>
+        <td style="text-align:right;font-variant-numeric:tabular-nums">${fmt(e.s)}</td>
+        <td style="text-align:right;font-variant-numeric:tabular-nums;font-weight:700">${fmt(e.total)}</td>
+      </tr>`;
+    }).join('');
+    return `<div class="roster-inner">
+      <div class="r-header">
+        <span class="r-title">Leadership (C-Suite + Director) &mdash; ${yr} &mdash; ${emps.length} people &mdash; ${fmt(totalComp)} total comp</span>
+        <span>
+          <a class="dash-link" href="Dashboard.html" target="_blank">Full dashboard &rarr;</a>
+          <span class="r-close" onclick="closeDrawer(event)">close &times;</span>
+        </span>
+      </div>
+      <table>
+        <thead><tr>
+          <th>Employee</th><th>Title</th><th style="text-align:right">Type</th>
+          <th style="text-align:right">Salary</th><th style="text-align:right">Total Comp</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+        <tfoot><tr>
+          <td colspan="3" style="font-weight:700;padding:6px 8px;background:#F1F5F9;border-top:2px solid #0F0F0F">Total (${emps.length} people)</td>
+          <td style="text-align:right;font-weight:700;padding:6px 8px;background:#F1F5F9;border-top:2px solid #0F0F0F;font-variant-numeric:tabular-nums">${fmt(totalSal)}</td>
+          <td style="text-align:right;font-weight:700;padding:6px 8px;background:#F1F5F9;border-top:2px solid #0F0F0F;font-variant-numeric:tabular-nums">${fmt(totalComp)}</td>
+        </tr></tfoot>
+      </table>
+      <div style="margin-top:8px;font-size:11px;color:#475569">Source: Transparent Utah FY${yr} &mdash; <a href="https://transparent.utah.gov" target="_blank" style="color:#0E7490">transparent.utah.gov</a>)</div>
+    </div>`;
+  }
+  
+  // All other tiers: summary + link to dashboard
+  return `<div class="roster-inner">
+    <div class="r-header">
+      <span class="r-title">${tier} &mdash; ${yr} &mdash; ${data.people} people &mdash; ${fmt(data.comp)} total comp</span>
+      <span>
+        <a class="dash-link" href="Dashboard.html" target="_blank">See full roster in dashboard &rarr;</a>
+        <span class="r-close" onclick="closeDrawer(event)">close &times;</span>
+      </span>
+    </div>
+    <div style="font-family:system-ui,sans-serif;font-size:13px;color:#475569;padding:8px 0">
+      ${data.people} employees &mdash; ${fmt(data.salary)} total salary (${data.pctSal.toFixed(1)}% of payroll) &mdash; ${fmt(data.comp)} total comp &mdash; avg ${fmt(Math.round(data.comp/data.people))}/person
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#0E7490">
+      <a href="Dashboard.html" target="_blank" style="color:#0E7490;font-weight:600">Open full interactive dashboard to browse individual ${tier} employees by year &rarr;</a>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:#94A3B8">Source: Transparent Utah FY${yr}</div>
+  </div>`;
+}
+
+function closeDrawer(e) {
+  e.stopPropagation();
+  const drawer = document.getElementById('roster-drawer');
+  if (drawer) { drawer.classList.remove('open'); drawer.querySelector('td').innerHTML = ''; }
+  document.querySelectorAll('.drill-row').forEach(r => r.classList.remove('open'));
+  openTier = null;
+}
+
+function toggleRoster(tier) {
+  const drawer = document.getElementById('roster-drawer');
+  const row = document.querySelector(`[data-tier="${tier}"]`);
+
+  if (openTier === tier) {
+    closeDrawer({ stopPropagation: () => {} });
+    return;
+  }
+
+  document.querySelectorAll('.drill-row').forEach(r => r.classList.remove('open'));
+  drawer.querySelector('td').innerHTML = buildRosterHTML(tier, currentYr);
+  drawer.classList.add('open');
+  row.classList.add('open');
+  openTier = tier;
+
+  setTimeout(() => drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+}
+
+function renderTierTable(yr) {
+  const data = AYC_DATA[yr];
+  const tot = data['_total'];
+  const tb = document.getElementById('tier-tb');
+  const tf = document.getElementById('tier-tf');
+  
+  const rows = TIER_ORDER.map(t => {
+    const d = data[t];
+    return { tier: t, people: d.people, salary: d.salary, pctSal: d.pctSal, comp: d.comp, pctComp: d.pctComp, avg: Math.round(d.comp / d.people) };
+  });
+
+  rows.sort((a, b) => {
+    if (sortCol === -1) return TIER_ORDER.indexOf(a.tier) - TIER_ORDER.indexOf(b.tier);
+    const keys = ['tier','people','comp','pctComp','avg'];
+    const k = keys[sortCol];
+    const av = a[k], bv = b[k];
+    return typeof av === 'string' ? av.localeCompare(bv) * sortDir : (av - bv) * sortDir;
+  });
+
+  tb.innerHTML = '';
+  openTier = null;
+  const drawer = document.getElementById('roster-drawer');
+  drawer.classList.remove('open');
+  drawer.querySelector('td').innerHTML = '';
+
+  rows.forEach(r => {
+    const isLdr = r.tier === 'Leadership';
+    const tr = document.createElement('tr');
+    tr.className = 'drill-row';
+    tr.dataset.tier = r.tier;
+    tr.title = `Click to see ${r.tier} roster (${yr})`;
+    tr.onclick = () => toggleRoster(r.tier);
+    tr.innerHTML = `
+      <td><span class="tier-badge ${BCLS[r.tier]}">${r.tier}</span></td>
+      <td class="r${isLdr?' hi':''}">${r.people}</td>
+      <td class="r${isLdr?' hi':''}">${fmt(r.comp)}</td>
+      <td class="r${isLdr?' hi':''}">${pct(r.pctComp)}</td>
+      <td class="r${isLdr?' hi':''}">${fmt(r.avg)}</td>
+    `;
+    tb.appendChild(tr);
+  });
+
+
+
+  tf.innerHTML = `
+    <tr>
+      <td>All tiers</td>
+      <td class="r">${tot.people}</td>
+      <td class="r">${fmt(tot.salary)}</td><td class="r">100%</td>
+      <td class="r">${fmt(tot.comp)}</td><td class="r">100%</td>
+      <td class="r">${fmt(Math.round(tot.comp / tot.people))}</td>
+    </tr>`;
+    
+  document.getElementById('tier-cnt').textContent = `${yr} · ${tot.people} employees · click any row to see roster · source: Transparent Utah`;
+}
+
+function sortTbl(col) {
+  if (sortCol === col) { sortDir *= -1; } else { sortCol = col; sortDir = col === -1 ? 1 : -1; }
+  document.querySelectorAll('#tier-tbl thead th').forEach((th, i) => {
+    th.classList.toggle('sorted', i === col);
+    const arrow = th.querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = i === col ? (sortDir === -1 ? '↓' : '↑') : '↕';
+  });
+  renderTierTable(currentYr);
+}
+
+// Year nav
+const nav = document.getElementById('tier-yr-nav');
+['2022','2023','2024','2025','2026'].forEach(yr => {
+  const btn = document.createElement('button');
+  btn.className = 'yr-btn' + (yr === '2026' ? ' active' : '');
+  btn.textContent = yr;
+  btn.onclick = () => {
+    currentYr = yr;
+    document.querySelectorAll('#tier-yr-nav .yr-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTierTable(yr);
+  };
+  nav.appendChild(btn);
+});
+
+// FY26 leadership roster (static section)
+// status: 'new' = new in FY26, 'departed' = partial year departure, '' = continuing
+const LDR26 = [
+  { n:'BASKETT, NOAH',          t:'CEO - Executive Director Library',      tier:'C-Suite',  s:186514, b:63201, total:249714, status:'' },
+  { n:'REHBEHN, DANIEL L',      t:'Chief Service and Impact Officer',      tier:'C-Suite',  s:182745, b:51881, total:234626, status:'' },
+  { n:'MOORE, JUDY',            t:'Chief Operations Officer',              tier:'C-Suite',  s:144489, b:48052, total:192541, status:'new' },
+  { n:'BAHR, TYLER D',          t:'Chief Financial Officer',               tier:'C-Suite',  s:144277, b:41848, total:186124, status:'' },
+  { n:'MASON, MARGARET',        t:'Chief People Officer',                  tier:'C-Suite',  s:131221, b:50635, total:181856, status:'' },
+  { n:'SWEENEY, JESSICA M',     t:'Chief Development Officer',             tier:'C-Suite',  s:122901, b:50550, total:173452, status:'' },
+  { n:'CHAPMAN, RUBY MICHELLE', t:'Director of Finance',                   tier:'Director', s:130826, b:40573, total:171399, status:'' },
+  { n:'MCQUEEN, QUINN A',       t:'Director of Marketing & Communications',tier:'Director', s:129473, b:36893, total:166367, status:'departed' },
+  { n:'EWING, MARK E.',         t:'Director of Public Services',           tier:'Director', s:111168, b:35965, total:147133, status:'' },
+  { n:'CAMPOLUCCI, NICOLE',     t:'Director of Safety and Social Services',tier:'Director', s:116398, b:28124, total:144522, status:'' },
+  { n:'YOUNG, BROOKE A',        t:'Director of Public Services',           tier:'Director', s:107470, b:35059, total:142530, status:'new' },
+  { n:'ROMRIELL, DEANNA M',     t:'Director of Community Engagement',      tier:'Director', s:103974, b:34024, total:137998, status:'' },
+  { n:'CHRISTENSEN, RITA A',    t:'Dir of Organizational Learning',        tier:'Director', s:102852, b:24113, total:126965, status:'' },
+  { n:'HERNANDEZ, LANA',        t:'Director of Employee Relations',        tier:'Director', s:93245,  b:21840, total:115084, status:'new' },
+  { n:'MCCULLOCK, ALLISON K',   t:'Interim Library Marketing Director',    tier:'Director', s:80657,  b:30591, total:111247, status:'new' },
+  { n:'EHRMAN, DEBORAH C',      t:'Chief Operations Officer (partial year)',tier:'C-Suite',  s:48978,  b:10857, total:59835, status:'departed' },
+];
+
+// Leadership roster year nav
+let ldrCurrentYr = '2026';
+const ldrNav = document.getElementById('ldr-yr-nav');
+if (ldrNav) {
+  ['2022','2023','2024','2025','2026'].forEach(yr => {
+    const btn = document.createElement('button');
+    btn.className = 'yr-btn' + (yr === '2026' ? ' active' : '');
+    btn.textContent = yr;
+    btn.onclick = () => {
+      ldrCurrentYr = yr;
+      document.querySelectorAll('#ldr-yr-nav .yr-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderLdrTable(yr);
+    };
+    ldrNav.appendChild(btn);
+  });
+}
+
+function renderLdrTable(yr) {
+  const ldrTb = document.getElementById('ldr-tb-26');
+  const ldrTf = document.getElementById('ldr-tf-26');
+  if (!ldrTb) return;
+  ldrTb.innerHTML = '';
+  
+  // Use LDR_ROSTER for all years, LDR26 with status badges for 2026
+  const emps = yr === '2026' ? null : (LDR_ROSTER[yr] || []);
+  const rows = yr === '2026' ? LDR26 : emps.map(e => ({...e, n:e.n, t:e.t, status:''}));
+  
+  rows.forEach(e => {
+    const tr = document.createElement('tr');
+    const bc = (e.tier || 'Director') === 'C-Suite' ? 'b-cs' : 'b-dir';
+    const rowStyle = yr === '2026' && e.status === 'new' ? 'background:#F0FDF4' 
+                   : yr === '2026' && e.status === 'departed' ? 'background:#FEF2F2' : '';
+    const statusBadge = yr === '2026' && e.status === 'new'
+      ? ' <span style="font-size:10px;background:#166534;color:white;padding:1px 6px;border-radius:2px;font-family:system-ui,sans-serif;font-weight:700;margin-left:4px">NEW</span>'
+      : yr === '2026' && e.status === 'departed'
+      ? ' <span style="font-size:10px;background:#991B1B;color:white;padding:1px 6px;border-radius:2px;font-family:system-ui,sans-serif;font-weight:700;margin-left:4px">DEPARTED</span>'
+      : '';
+    const name = e.n || e.name || '';
+    const title = e.t || e.title || '';
+    const tier = e.tier || 'Director';
+    const sal = e.s || e.salary || 0;
+    const ben = e.b || e.benefits || 0;
+    const tot = e.total || 0;
+    const tierLabel = tier.replace(' (partial year)','');
+    if (rowStyle) tr.style.cssText = rowStyle;
+    tr.innerHTML = `<td>${name}${statusBadge}</td><td>${title}</td><td class="r"><span class="tier-badge ${bc}">${tierLabel}</span></td><td class="r">${fmt(sal)}</td><td class="r">${fmt(ben)}</td><td class="r"><strong>${fmt(tot)}</strong></td>`;
+    ldrTb.appendChild(tr);
+  });
+  
+  const totSal = rows.reduce((s,e)=>s+(e.s||e.salary||0),0);
+  const totBen = rows.reduce((s,e)=>s+(e.b||e.benefits||0),0);
+  const totComp = rows.reduce((s,e)=>s+(e.total||0),0);
+  ldrTf.innerHTML = `<tr><td colspan="3"><strong>Total — FY2026 (${rows.length} people)</strong></td><td class="r">${fmt(totSal)}</td><td class="r">${fmt(totBen)}</td><td class="r">${fmt(totComp)}</td></tr>`;
+}
+
+const ldrTb = document.getElementById('ldr-tb-26');
+const ldrTf = document.getElementById('ldr-tf-26');
+if (ldrTb) {
+  renderLdrTable('2026');
+}
+
+renderTierTable('2026');
+
+</script>
+</body>
+</html>
