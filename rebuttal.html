@@ -488,14 +488,39 @@
   }
 
   @media (max-width: 720px) {
-    body { padding: 20px 14px 60px; font-size: 15px; }
-    .metric-pair { grid-template-columns: 1fr; }
-    .stat-row { grid-template-columns: 1fr; gap: 10px; }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.2rem; }
-    .math-box { font-size: 12px; white-space: pre-wrap; word-break: break-word; }
-    .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    table { min-width: 360px; }
+      .math-box { font-size: 12px; white-space: pre-wrap; word-break: break-word; }
+      .tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+      /* Tables scroll horizontally — never squish */
+      table { min-width: 480px; table-layout: auto !important; }
+      thead th { font-size: 9px !important; padding: 5px 5px !important;
+                 white-space: normal !important; word-break: break-word;
+                 min-width: 48px; }
+      tbody td { font-size: 10px !important; padding: 4px 5px !important; }
+      tfoot td { font-size: 10px !important; padding: 4px 5px !important; }
+
+      /* Stat cards stack vertically */
+      .stat-row { flex-direction: column !important; gap: 8px !important; }
+      .stat-card { min-width: 0 !important; width: 100% !important; }
+      .sc-val { font-size: 1.4rem !important; }
+
+      /* Metric pairs stack */
+      .metric-pair { flex-direction: column !important; }
+      .metric-half { min-width: 0 !important; }
+
+      /* Body breathing room */
+      body { padding: 16px 12px 60px !important; font-size: 13px; }
+      h2 { font-size: 1rem !important; }
+
+      /* YoY chart full width */
+      svg { width: 100% !important; }
+
+      /* Pull quote narrower */
+      .pull-quote { padding: 12px 14px !important; }
+      .pull-quote p { font-size: 1rem !important; }
+
+      /* Problem cards */
+      .problem-card { padding: 12px !important; }
     .nav-bar { flex-direction: column; gap: 10px; align-items: flex-start; }
     .metric-half { padding: 16px; }
     .pull-quote { padding: 12px 14px; }
