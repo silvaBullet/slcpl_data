@@ -534,10 +534,11 @@
   .yr-btn:hover:not(.active) { border-color: #0F0F0F; color: #0F0F0F; }
   .tbl-controls { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
   #tier-cnt { font-size: 12px; color: #6B7280; }
-  body { max-width: 900px; margin: 0 auto; padding: 32px 40px; font-size: 13px; }
+  body { max-width: 900px; margin: 0 auto; padding: 0 40px 32px; font-size: 13px; }
   p { max-width: none; }
   .nav-bar { display: flex; justify-content: flex-end; padding: 8px 0 16px; border-bottom: 1px solid #E5E7EB; margin-bottom: 24px; }
   .nav-bar a { font-size: 12px; color: #0E7490; text-decoration: none; }
+  #sticky-nav { position: sticky; top: 0; z-index: 999; background: white !important; display: flex; justify-content: flex-end; align-items: center; padding: 8px 16px; border-bottom: 2px solid #E5E7EB; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
   section { margin-bottom: 28px !important; padding-top: 24px !important; border-top: 1px solid #E5E7EB; }
   section:first-of-type { padding-top: 0; border-top: none; }
   table { table-layout: fixed; width: 100%; border-collapse: collapse; }
@@ -548,9 +549,10 @@
 </head>
 <body>
 
-<div class="nav-bar">
+<div class="nav-bar" id="sticky-nav">
   <a href="Dashboard.html">Full Data Dashboard &rarr;</a>
-  <a href="https://docs.google.com/spreadsheets/d/1dV3eWasXZsLBNJzlC_OZnJLTDCIVQwtbRuSUYOjoMkI" target="_blank" rel="noopener" style="margin-left:16px">Audit Trail (Google Sheets) &rarr;</a>
+  <a href="https://docs.google.com/spreadsheets/d/1dV3eWasXZsLBNJzlC_OZnJLTDCIVQwtbRuSUYOjoMkI" target="_blank" rel="noopener" style="margin-left:16px">Audit Trail &rarr;</a>
+  <a href="https://drive.google.com/file/d/1L_SUYbjaJosfEtTergU13kGwholeMiZi/view?usp=drive_link" target="_blank" rel="noopener" style="margin-left:16px">Their Presentation &rarr;</a>
 </div>
 
 <header class="doc-header">
