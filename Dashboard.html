@@ -233,7 +233,7 @@ table.no-click tbody tr:hover td{background:#FAFAFA!important;cursor:default;}
       <thead><tr>
         <th onclick="sortTable('tier-tbl',0)">Tier <span class="sort-arrow">&#8597;</span></th>
         <th class="r" onclick="sortTable('tier-tbl',1,true)">Count <span class="sort-arrow">&#8597;</span></th>
-        <th class="r" onclick="sortTable('tier-tbl',2,true)">Total Salary <span class="sort-arrow">&#8597;</span></th>
+        <th class="r" onclick="sortTable('tier-tbl',2,true)">Net Amount <span class="sort-arrow">&#8597;</span></th>
         <th class="r" onclick="sortTable('tier-tbl',3,true)">Total Benefits <span class="sort-arrow">&#8597;</span></th>
         <th class="r" onclick="sortTable('tier-tbl',4,true)">Total Comp <span class="sort-arrow">&#8597;</span></th>
         <th class="r" onclick="sortTable('tier-tbl',5,true)">Avg/Person <span class="sort-arrow">&#8597;</span></th>
@@ -1021,7 +1021,7 @@ function renderDrillTier(tier,yr){
       <div class="sbox"><div class="sbl">Employees</div><div class="sbv">${employees.length}<span style="font-size:12px;font-weight:400;color:var(--gray-500)"> of ${pool.length}</span></div></div>
       <div class="sbox"><div class="sbl">Total Comp</div><div class="sbv">${fmt(totalComp)}<span style="font-size:12px;font-weight:400;color:var(--gray-500)"> (${tierPct}%)</span></div></div>
       <div class="sbox"><div class="sbl">Avg / Person</div><div class="sbv">${employees.length?fmt(totalComp/employees.length):'—'}</div></div>
-      <div class="sbox"><div class="sbl">Total Salary</div><div class="sbv">${fmt(totalSal)}<span style="font-size:11px;color:var(--gray-500)"> ${salPct}%</span></div></div>
+      <div class="sbox"><div class="sbl">Net Amount</div><div class="sbv">${fmt(totalSal)}<span style="font-size:11px;color:var(--gray-500)"> ${salPct}%</span></div></div>
       <div class="sbox"><div class="sbl">Total Benefits</div><div class="sbv">${fmt(totalBen)}<span style="font-size:11px;color:var(--gray-500)"> ${benPct}%</span></div></div>
     </div>
     <div class="tbl-wrap"><table id="${tblId}">
